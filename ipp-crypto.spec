@@ -4,13 +4,12 @@
 #
 Name     : ipp-crypto
 Version  : ippcp.2020u3
-Release  : 1
+Release  : 2
 URL      : https://github.com/intel/ipp-crypto/archive/refs/tags/ippcp_2020u3.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/refs/tags/ippcp_2020u3.tar.gz
 Summary  : %{product_name}
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: ipp-crypto-lib = %{version}-%{release}
 Requires: ipp-crypto-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : nasm
@@ -24,21 +23,11 @@ BuildRequires : python3
 %package dev
 Summary: dev components for the ipp-crypto package.
 Group: Development
-Requires: ipp-crypto-lib = %{version}-%{release}
 Provides: ipp-crypto-devel = %{version}-%{release}
 Requires: ipp-crypto = %{version}-%{release}
 
 %description dev
 dev components for the ipp-crypto package.
-
-
-%package lib
-Summary: lib components for the ipp-crypto package.
-Group: Libraries
-Requires: ipp-crypto-license = %{version}-%{release}
-
-%description lib
-lib components for the ipp-crypto package.
 
 
 %package license
@@ -58,7 +47,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1616774718
+export SOURCE_DATE_EPOCH=1616776011
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -71,16 +60,22 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1616774718
+export SOURCE_DATE_EPOCH=1616776011
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_2020u3/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/9cff2ac4edb537b1ae09dc9dde0260cb28d00a9e
 pushd clr-build
 %make_install
 popd
+## install_append content
+mkdir -p %{buildroot}/usrlib64
+mv %{buildroot}/usr/lib/*/*so %{buildroot}/usr/lib64
+rmdir %{buildroot}/usr/lib/*
+## install_append end
 
 %files
 %defattr(-,root,root,-)
+/usr/lib64
 /usr/tools/custom_library_tool_python/gui/app.py
 /usr/tools/custom_library_tool_python/gui/controller.py
 /usr/tools/custom_library_tool_python/gui/custom_functions_panel.py
@@ -113,10 +108,6 @@ popd
 /usr/include/ippcp.h
 /usr/include/ippcpdefs.h
 /usr/include/ippversion.h
-
-%files lib
-%defattr(-,root,root,-)
-/usr/lib/intel64/libippcp.so
 
 %files license
 %defattr(0644,root,root,0755)
