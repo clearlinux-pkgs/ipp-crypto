@@ -1,3 +1,3 @@
-mkdir -p %{buildroot}/usrlib64
+mkdir -p %{buildroot}/usr/lib64
 mv %{buildroot}/usr/lib/*/*so %{buildroot}/usr/lib64
 rmdir %{buildroot}/usr/lib/*
