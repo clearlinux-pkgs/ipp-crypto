@@ -1,1 +1,2 @@
 -DARCH=intel64
+-DCMAKE_INSTALL_PREFIX=/usr
