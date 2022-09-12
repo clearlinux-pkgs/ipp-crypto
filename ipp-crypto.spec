@@ -4,7 +4,7 @@
 #
 Name     : ipp-crypto
 Version  : ippcp.2021.6
-Release  : 5
+Release  : 6
 URL      : https://github.com/intel/ipp-crypto/archive/refs/tags/ippcp_2021.6.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/refs/tags/ippcp_2021.6.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
