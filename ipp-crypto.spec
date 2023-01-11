@@ -4,18 +4,22 @@
 #
 Name     : ipp-crypto
 Version  : ippcp.2021.6
-Release  : 6
+Release  : 7
 URL      : https://github.com/intel/ipp-crypto/archive/refs/tags/ippcp_2021.6.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/refs/tags/ippcp_2021.6.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
 Group    : Development/Tools
 License  : Apache-2.0
+Requires: ipp-crypto-filemap = %{version}-%{release}
 Requires: ipp-crypto-lib = %{version}-%{release}
 Requires: ipp-crypto-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : nasm
 BuildRequires : openssl-dev
 BuildRequires : python3
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 # Intel® Integrated Performance Primitives Cryptography
@@ -32,10 +36,19 @@ Requires: ipp-crypto = %{version}-%{release}
 dev components for the ipp-crypto package.
 
 
+%package filemap
+Summary: filemap components for the ipp-crypto package.
+Group: Default
+
+%description filemap
+filemap components for the ipp-crypto package.
+
+
 %package lib
 Summary: lib components for the ipp-crypto package.
 Group: Libraries
 Requires: ipp-crypto-license = %{version}-%{release}
+Requires: ipp-crypto-filemap = %{version}-%{release}
 
 %description lib
 lib components for the ipp-crypto package.
@@ -58,24 +71,60 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1662669948
+export SOURCE_DATE_EPOCH=1673471060
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+%cmake .. -DARCH=intel64 \
+-DCMAKE_INSTALL_PREFIX=/usr
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+%cmake .. -DARCH=intel64 \
+-DCMAKE_INSTALL_PREFIX=/usr
+make  %{?_smp_mflags}
+popd
+mkdir -p clr-build-avx512
+pushd clr-build-avx512
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
+export CFLAGS="$CFLAGS -march=x86-64-v4 -m64 -Wl,-z,x86-64-v4 -mprefer-vector-width=512"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v4 -m64 -Wl,-z,x86-64-v4 -mprefer-vector-width=512"
+export FFLAGS="$FFLAGS -march=x86-64-v4 -m64 -Wl,-z,x86-64-v4 -mprefer-vector-width=512"
+export FCFLAGS="$FCFLAGS -march=x86-64-v4 -m64 "
 %cmake .. -DARCH=intel64 \
 -DCMAKE_INSTALL_PREFIX=/usr
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1662669948
+export SOURCE_DATE_EPOCH=1673471060
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_2021.6/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/30001d543aa58e285d1984caabdd4631f2be514c || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
+pushd clr-build-avx512
+%make_install_v4  || :
+popd
 pushd clr-build
 %make_install
 popd
@@ -84,6 +133,8 @@ mkdir -p %{buildroot}/usr/lib64
 mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
 #rmdir %{buildroot}/usr/lib/*
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx512 %{buildroot}-v4 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -144,6 +195,10 @@ mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
 /usr/lib64/pkgconfig/ippcp-static-intel64-nonpic.pc
 /usr/lib64/pkgconfig/ippcp-static-intel64.pc
 
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-ipp-crypto
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libcrypto_mb.so
@@ -152,6 +207,7 @@ mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
 /usr/lib64/libippcp.so
 /usr/lib64/libippcp.so.11
 /usr/lib64/libippcp.so.11.4
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
