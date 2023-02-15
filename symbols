@@ -81,6 +81,11 @@ libcrypto_mb.so.11:mbx_sm3_final_mb16
 libcrypto_mb.so.11:mbx_sm3_init_mb16
 libcrypto_mb.so.11:mbx_sm3_msg_digest_mb16
 libcrypto_mb.so.11:mbx_sm3_update_mb16
+libcrypto_mb.so.11:mbx_sm4_ccm_decrypt_mb16
+libcrypto_mb.so.11:mbx_sm4_ccm_encrypt_mb16
+libcrypto_mb.so.11:mbx_sm4_ccm_get_tag_mb16
+libcrypto_mb.so.11:mbx_sm4_ccm_init_mb16
+libcrypto_mb.so.11:mbx_sm4_ccm_update_aad_mb16
 libcrypto_mb.so.11:mbx_sm4_decrypt_cbc_mb16
 libcrypto_mb.so.11:mbx_sm4_decrypt_cfb128_mb16
 libcrypto_mb.so.11:mbx_sm4_decrypt_ctr128_mb16
@@ -91,6 +96,12 @@ libcrypto_mb.so.11:mbx_sm4_encrypt_cfb128_mb16
 libcrypto_mb.so.11:mbx_sm4_encrypt_ctr128_mb16
 libcrypto_mb.so.11:mbx_sm4_encrypt_ecb_mb16
 libcrypto_mb.so.11:mbx_sm4_encrypt_ofb_mb16
+libcrypto_mb.so.11:mbx_sm4_gcm_decrypt_mb16
+libcrypto_mb.so.11:mbx_sm4_gcm_encrypt_mb16
+libcrypto_mb.so.11:mbx_sm4_gcm_get_tag_mb16
+libcrypto_mb.so.11:mbx_sm4_gcm_init_mb16
+libcrypto_mb.so.11:mbx_sm4_gcm_update_aad_mb16
+libcrypto_mb.so.11:mbx_sm4_gcm_update_iv_mb16
 libcrypto_mb.so.11:mbx_sm4_set_key_mb16
 libcrypto_mb.so.11:mbx_x25519_mb8
 libcrypto_mb.so.11:mbx_x25519_public_key_mb8
@@ -133,6 +144,7 @@ libippcp.so.11:ippsAESGetSize
 libippcp.so.11:ippsAESInit
 libippcp.so.11:ippsAESPack
 libippcp.so.11:ippsAESSetKey
+libippcp.so.11:ippsAESSetupNoise
 libippcp.so.11:ippsAESUnpack
 libippcp.so.11:ippsAES_CCMDecrypt
 libippcp.so.11:ippsAES_CCMEncrypt
@@ -146,6 +158,7 @@ libippcp.so.11:ippsAES_CMACFinal
 libippcp.so.11:ippsAES_CMACGetSize
 libippcp.so.11:ippsAES_CMACGetTag
 libippcp.so.11:ippsAES_CMACInit
+libippcp.so.11:ippsAES_CMACSetupNoise
 libippcp.so.11:ippsAES_CMACUpdate
 libippcp.so.11:ippsAES_EncryptCFB16_MB
 libippcp.so.11:ippsAES_GCMDecrypt
@@ -156,6 +169,7 @@ libippcp.so.11:ippsAES_GCMInit
 libippcp.so.11:ippsAES_GCMProcessAAD
 libippcp.so.11:ippsAES_GCMProcessIV
 libippcp.so.11:ippsAES_GCMReset
+libippcp.so.11:ippsAES_GCMSetupNoise
 libippcp.so.11:ippsAES_GCMStart
 libippcp.so.11:ippsAES_S2V_CMAC
 libippcp.so.11:ippsAES_SIVDecrypt
@@ -277,6 +291,8 @@ libippcp.so.11:ippsGFpECBindGxyTblStd521r1
 libippcp.so.11:ippsGFpECBindGxyTblStdSM2
 libippcp.so.11:ippsGFpECCmpPoint
 libippcp.so.11:ippsGFpECCpyPoint
+libippcp.so.11:ippsGFpECDecryptSM2_Ext
+libippcp.so.11:ippsGFpECDecryptSM2_Ext_DecMsgSize
 libippcp.so.11:ippsGFpECESDecrypt_SM2
 libippcp.so.11:ippsGFpECESEncrypt_SM2
 libippcp.so.11:ippsGFpECESFinal_SM2
@@ -285,6 +301,8 @@ libippcp.so.11:ippsGFpECESGetSize_SM2
 libippcp.so.11:ippsGFpECESInit_SM2
 libippcp.so.11:ippsGFpECESSetKey_SM2
 libippcp.so.11:ippsGFpECESStart_SM2
+libippcp.so.11:ippsGFpECEncryptSM2_Ext
+libippcp.so.11:ippsGFpECEncryptSM2_Ext_EncMsgSize
 libippcp.so.11:ippsGFpECGet
 libippcp.so.11:ippsGFpECGetInfo_GF
 libippcp.so.11:ippsGFpECGetPoint
@@ -302,7 +320,13 @@ libippcp.so.11:ippsGFpECInitStd384r1
 libippcp.so.11:ippsGFpECInitStd521r1
 libippcp.so.11:ippsGFpECInitStdBN256
 libippcp.so.11:ippsGFpECInitStdSM2
+libippcp.so.11:ippsGFpECKeyExchangeSM2_Confirm
+libippcp.so.11:ippsGFpECKeyExchangeSM2_GetSize
+libippcp.so.11:ippsGFpECKeyExchangeSM2_Init
+libippcp.so.11:ippsGFpECKeyExchangeSM2_Setup
+libippcp.so.11:ippsGFpECKeyExchangeSM2_SharedKey
 libippcp.so.11:ippsGFpECMakePoint
+libippcp.so.11:ippsGFpECMessageRepresentationSM2
 libippcp.so.11:ippsGFpECMulPoint
 libippcp.so.11:ippsGFpECNegPoint
 libippcp.so.11:ippsGFpECPointGetSize
@@ -329,6 +353,7 @@ libippcp.so.11:ippsGFpECSignSM2
 libippcp.so.11:ippsGFpECTstKeyPair
 libippcp.so.11:ippsGFpECTstPoint
 libippcp.so.11:ippsGFpECTstPointInSubgroup
+libippcp.so.11:ippsGFpECUserIDHashSM2
 libippcp.so.11:ippsGFpECVerify
 libippcp.so.11:ippsGFpECVerifyDSA
 libippcp.so.11:ippsGFpECVerifyNR
@@ -448,6 +473,17 @@ libippcp.so.11:ippsHashMethod_SHA512_256
 libippcp.so.11:ippsHashMethod_SM3
 libippcp.so.11:ippsHashPack
 libippcp.so.11:ippsHashPack_rmf
+libippcp.so.11:ippsHashStateMethodSet_SHA224
+libippcp.so.11:ippsHashStateMethodSet_SHA224_NI
+libippcp.so.11:ippsHashStateMethodSet_SHA224_TT
+libippcp.so.11:ippsHashStateMethodSet_SHA256
+libippcp.so.11:ippsHashStateMethodSet_SHA256_NI
+libippcp.so.11:ippsHashStateMethodSet_SHA256_TT
+libippcp.so.11:ippsHashStateMethodSet_SHA384
+libippcp.so.11:ippsHashStateMethodSet_SHA512
+libippcp.so.11:ippsHashStateMethodSet_SHA512_224
+libippcp.so.11:ippsHashStateMethodSet_SHA512_256
+libippcp.so.11:ippsHashStateMethodSet_SM3
 libippcp.so.11:ippsHashUnpack
 libippcp.so.11:ippsHashUnpack_rmf
 libippcp.so.11:ippsHashUpdate
