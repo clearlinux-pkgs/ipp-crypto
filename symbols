@@ -168,6 +168,7 @@ libippcp.so.11:ippsAES_GCMGetTag
 libippcp.so.11:ippsAES_GCMInit
 libippcp.so.11:ippsAES_GCMProcessAAD
 libippcp.so.11:ippsAES_GCMProcessIV
+libippcp.so.11:ippsAES_GCMReinit
 libippcp.so.11:ippsAES_GCMReset
 libippcp.so.11:ippsAES_GCMSetupNoise
 libippcp.so.11:ippsAES_GCMStart
