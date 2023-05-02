@@ -5,13 +5,12 @@
 #
 Name     : ipp-crypto
 Version  : 2021.7.1
-Release  : 10
+Release  : 11
 URL      : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
 Group    : Development/Tools
 License  : Apache-2.0 MIT
-Requires: ipp-crypto-filemap = %{version}-%{release}
 Requires: ipp-crypto-lib = %{version}-%{release}
 Requires: ipp-crypto-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
@@ -37,19 +36,10 @@ Requires: ipp-crypto = %{version}-%{release}
 dev components for the ipp-crypto package.
 
 
-%package filemap
-Summary: filemap components for the ipp-crypto package.
-Group: Default
-
-%description filemap
-filemap components for the ipp-crypto package.
-
-
 %package lib
 Summary: lib components for the ipp-crypto package.
 Group: Libraries
 Requires: ipp-crypto-license = %{version}-%{release}
-Requires: ipp-crypto-filemap = %{version}-%{release}
 
 %description lib
 lib components for the ipp-crypto package.
@@ -72,14 +62,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680298287
+export SOURCE_DATE_EPOCH=1682989421
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 %cmake .. -DARCH=intel64 \
 -DCMAKE_INSTALL_PREFIX=/usr
 make  %{?_smp_mflags}
@@ -87,10 +77,10 @@ popd
 mkdir -p clr-build-avx2
 pushd clr-build-avx2
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
-export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
-export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86-64-v3 "
 export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
 export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
@@ -102,10 +92,10 @@ popd
 mkdir -p clr-build-avx512
 pushd clr-build-avx512
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
-export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
-export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
-export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz -march=x86_64-v4 -mprefer-vector-width=512 "
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86_64-v4 -mprefer-vector-width=512 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86_64-v4 -mprefer-vector-width=512 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86_64-v4 -mprefer-vector-width=512 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v4 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd -march=x86_64-v4 -mprefer-vector-width=512 "
 export CFLAGS="$CFLAGS -march=x86-64-v4 -m64 -Wl,-z,x86-64-v4 -mprefer-vector-width=512"
 export CXXFLAGS="$CXXFLAGS -march=x86-64-v4 -m64 -Wl,-z,x86-64-v4 -mprefer-vector-width=512"
 export FFLAGS="$FFLAGS -march=x86-64-v4 -m64 -Wl,-z,x86-64-v4 -mprefer-vector-width=512"
@@ -116,7 +106,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1680298287
+export SOURCE_DATE_EPOCH=1682989421
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_%{version}/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/30001d543aa58e285d1984caabdd4631f2be514c || :
@@ -200,19 +190,26 @@ mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
 /usr/lib64/pkgconfig/ippcp-static-intel64-nonpic.pc
 /usr/lib64/pkgconfig/ippcp-static-intel64.pc
 
-%files filemap
-%defattr(-,root,root,-)
-/usr/share/clear/filemap/filemap-ipp-crypto
-
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib/intel64/libcrypto_mb.so
+/V3/usr/lib/intel64/libcrypto_mb.so.11
+/V3/usr/lib/intel64/libcrypto_mb.so.11.6
+/V3/usr/lib/intel64/libippcp.so
+/V3/usr/lib/intel64/libippcp.so.11
+/V3/usr/lib/intel64/libippcp.so.11.6
+/V4/usr/lib/intel64/libcrypto_mb.so
+/V4/usr/lib/intel64/libcrypto_mb.so.11
+/V4/usr/lib/intel64/libcrypto_mb.so.11.6
+/V4/usr/lib/intel64/libippcp.so
+/V4/usr/lib/intel64/libippcp.so.11
+/V4/usr/lib/intel64/libippcp.so.11.6
 /usr/lib64/libcrypto_mb.so
 /usr/lib64/libcrypto_mb.so.11
 /usr/lib64/libcrypto_mb.so.11.6
 /usr/lib64/libippcp.so
 /usr/lib64/libippcp.so.11
 /usr/lib64/libippcp.so.11.6
-/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
