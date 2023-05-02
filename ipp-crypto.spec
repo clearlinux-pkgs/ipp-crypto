@@ -5,7 +5,7 @@
 #
 Name     : ipp-crypto
 Version  : 2021.7.1
-Release  : 11
+Release  : 12
 URL      : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
@@ -62,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682989421
+export SOURCE_DATE_EPOCH=1683040461
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -106,7 +106,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1682989421
+export SOURCE_DATE_EPOCH=1683040461
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_%{version}/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/30001d543aa58e285d1984caabdd4631f2be514c || :
@@ -122,7 +122,11 @@ pushd clr-build
 popd
 ## install_append content
 mkdir -p %{buildroot}/usr/lib64
+mkdir -p %{buildroot}/V3/usr/lib64
+mkdir -p %{buildroot}/V4/usr/lib64
 mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
+mv %{buildroot}-v3/usr/lib/*/*so* %{buildroot}/V3/usr/lib64
+mv %{buildroot}-v4/usr/lib/*/*so* %{buildroot}/V4/usr/lib64
 #rmdir %{buildroot}/usr/lib/*
 ## install_append end
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
@@ -192,18 +196,18 @@ mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib/intel64/libcrypto_mb.so
-/V3/usr/lib/intel64/libcrypto_mb.so.11
-/V3/usr/lib/intel64/libcrypto_mb.so.11.6
-/V3/usr/lib/intel64/libippcp.so
-/V3/usr/lib/intel64/libippcp.so.11
-/V3/usr/lib/intel64/libippcp.so.11.6
-/V4/usr/lib/intel64/libcrypto_mb.so
-/V4/usr/lib/intel64/libcrypto_mb.so.11
-/V4/usr/lib/intel64/libcrypto_mb.so.11.6
-/V4/usr/lib/intel64/libippcp.so
-/V4/usr/lib/intel64/libippcp.so.11
-/V4/usr/lib/intel64/libippcp.so.11.6
+/V3/usr/lib64/libcrypto_mb.so
+/V3/usr/lib64/libcrypto_mb.so.11
+/V3/usr/lib64/libcrypto_mb.so.11.6
+/V3/usr/lib64/libippcp.so
+/V3/usr/lib64/libippcp.so.11
+/V3/usr/lib64/libippcp.so.11.6
+/V4/usr/lib64/libcrypto_mb.so
+/V4/usr/lib64/libcrypto_mb.so.11
+/V4/usr/lib64/libcrypto_mb.so.11.6
+/V4/usr/lib64/libippcp.so
+/V4/usr/lib64/libippcp.so.11
+/V4/usr/lib64/libippcp.so.11.6
 /usr/lib64/libcrypto_mb.so
 /usr/lib64/libcrypto_mb.so.11
 /usr/lib64/libcrypto_mb.so.11.6
