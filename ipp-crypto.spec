@@ -5,7 +5,7 @@
 #
 Name     : ipp-crypto
 Version  : 2021.7.1
-Release  : 12
+Release  : 14
 URL      : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
@@ -62,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683040461
+export SOURCE_DATE_EPOCH=1684426385
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -106,7 +106,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1683040461
+export SOURCE_DATE_EPOCH=1684426385
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_%{version}/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/30001d543aa58e285d1984caabdd4631f2be514c || :
@@ -120,6 +120,13 @@ popd
 pushd clr-build
 %make_install
 popd
+## Remove excluded files
+rm -f %{buildroot}*/usr/lib64/pkgconfig/ippcp-dynamic-ia32.pc
+rm -f %{buildroot}*/usr/lib64/pkgconfig/ippcp-dynamic-intel64.pc
+rm -f %{buildroot}*/usr/lib64/pkgconfig/ippcp-static-ia32-nonpic.pc
+rm -f %{buildroot}*/usr/lib64/pkgconfig/ippcp-static-ia32.pc
+rm -f %{buildroot}*/usr/lib64/pkgconfig/ippcp-static-intel64-nonpic.pc
+rm -f %{buildroot}*/usr/lib64/pkgconfig/ippcp-static-intel64.pc
 ## install_append content
 mkdir -p %{buildroot}/usr/lib64
 mkdir -p %{buildroot}/V3/usr/lib64
@@ -187,12 +194,6 @@ mv %{buildroot}-v4/usr/lib/*/*so* %{buildroot}/V4/usr/lib64
 /usr/lib/cmake/ippcp/ippcp-config.cmake
 /usr/lib64/pkgconfig/crypto_mb-dynamic-intel64.pc
 /usr/lib64/pkgconfig/crypto_mb-static-intel64.pc
-/usr/lib64/pkgconfig/ippcp-dynamic-ia32.pc
-/usr/lib64/pkgconfig/ippcp-dynamic-intel64.pc
-/usr/lib64/pkgconfig/ippcp-static-ia32-nonpic.pc
-/usr/lib64/pkgconfig/ippcp-static-ia32.pc
-/usr/lib64/pkgconfig/ippcp-static-intel64-nonpic.pc
-/usr/lib64/pkgconfig/ippcp-static-intel64.pc
 
 %files lib
 %defattr(-,root,root,-)
