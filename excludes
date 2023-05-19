@@ -6,3 +6,5 @@
 /usr/lib64/pkgconfig/ippcp-static-ia32.pc
 /usr/lib64/pkgconfig/ippcp-static-intel64-nonpic.pc
 /usr/lib64/pkgconfig/ippcp-static-intel64.pc
+/usr/lib64/pkgconfig/crypto_mb-dynamic-intel64.pc
+/usr/lib64/pkgconfig/crypto_mb-static-intel64.pc
