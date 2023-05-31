@@ -5,7 +5,7 @@
 #
 Name     : ipp-crypto
 Version  : 2021.7.1
-Release  : 15
+Release  : 16
 URL      : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Source0  : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
@@ -62,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684517430
+export SOURCE_DATE_EPOCH=1685557926
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -106,7 +106,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1684517430
+export SOURCE_DATE_EPOCH=1685557926
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_%{version}/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/30001d543aa58e285d1984caabdd4631f2be514c || :
