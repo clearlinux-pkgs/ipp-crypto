@@ -1,7 +1,7 @@
 mkdir -p %{buildroot}/usr/lib64
-mkdir -p %{buildroot}/V3/usr/lib64
-mkdir -p %{buildroot}/V4/usr/lib64
+mkdir -p %{buildroot}-v3/usr/lib64
+mkdir -p %{buildroot}-v4/usr/lib64
 mv %{buildroot}/usr/lib/*/*so* %{buildroot}/usr/lib64
-mv %{buildroot}-v3/usr/lib/*/*so* %{buildroot}/V3/usr/lib64
-mv %{buildroot}-v4/usr/lib/*/*so* %{buildroot}/V4/usr/lib64
+mv %{buildroot}-v3/usr/lib/*/*so* %{buildroot}-v3/usr/lib64
+mv %{buildroot}-v4/usr/lib/*/*so* %{buildroot}-v4/usr/lib64
 #rmdir %{buildroot}/usr/lib/*
