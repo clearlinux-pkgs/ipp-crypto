@@ -4,10 +4,10 @@
 # Using build pattern: cmake
 #
 Name     : ipp-crypto
-Version  : 2021.7.1
-Release  : 17
-URL      : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
-Source0  : https://github.com/intel/ipp-crypto/archive/ippcp_2021.7.1/ipp-crypto-2021.7.1.tar.gz
+Version  : 2021.8
+Release  : 18
+URL      : https://github.com/intel/ipp-crypto/archive/ippcp_2021.8/ipp-crypto-2021.8.tar.gz
+Source0  : https://github.com/intel/ipp-crypto/archive/ippcp_2021.8/ipp-crypto-2021.8.tar.gz
 Summary  : Secure, fast and lightweight library of building blocks for cryptography, highly-optimized for various Intel® CPUs.
 Group    : Development/Tools
 License  : Apache-2.0 MIT
@@ -54,15 +54,15 @@ license components for the ipp-crypto package.
 
 
 %prep
-%setup -q -n ipp-crypto-ippcp_2021.7.1
-cd %{_builddir}/ipp-crypto-ippcp_2021.7.1
+%setup -q -n ipp-crypto-ippcp_2021.8
+cd %{_builddir}/ipp-crypto-ippcp_2021.8
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1687468844
+export SOURCE_DATE_EPOCH=1695773455
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -106,7 +106,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1687468844
+export SOURCE_DATE_EPOCH=1695773455
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ipp-crypto
 cp %{_builddir}/ipp-crypto-ippcp_%{version}/LICENSE %{buildroot}/usr/share/package-licenses/ipp-crypto/30001d543aa58e285d1984caabdd4631f2be514c || :
@@ -150,6 +150,7 @@ mv %{buildroot}-v4/usr/lib/*/*so* %{buildroot}-v4/usr/lib64
 /usr/tools/custom_library_tool_python/gui/settings_panel.py
 /usr/tools/custom_library_tool_python/license_MIT.txt
 /usr/tools/custom_library_tool_python/main.py
+/usr/tools/custom_library_tool_python/requirements.txt
 /usr/tools/custom_library_tool_python/tests/functions_tests.py
 /usr/tools/custom_library_tool_python/tests/utils.py
 /usr/tools/custom_library_tool_python/tool/core.py
@@ -197,16 +198,16 @@ mv %{buildroot}-v4/usr/lib/*/*so* %{buildroot}-v4/usr/lib64
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libcrypto_mb.so.11.6
-/V3/usr/lib64/libippcp.so.11.6
-/V4/usr/lib64/libcrypto_mb.so.11.6
-/V4/usr/lib64/libippcp.so.11.6
+/V3/usr/lib64/libcrypto_mb.so.11.8
+/V3/usr/lib64/libippcp.so.11.8
+/V4/usr/lib64/libcrypto_mb.so.11.8
+/V4/usr/lib64/libippcp.so.11.8
 /usr/lib64/libcrypto_mb.so
 /usr/lib64/libcrypto_mb.so.11
-/usr/lib64/libcrypto_mb.so.11.6
+/usr/lib64/libcrypto_mb.so.11.8
 /usr/lib64/libippcp.so
 /usr/lib64/libippcp.so.11
-/usr/lib64/libippcp.so.11.6
+/usr/lib64/libippcp.so.11.8
 
 %files license
 %defattr(0644,root,root,0755)

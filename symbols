@@ -103,6 +103,9 @@ libcrypto_mb.so.11:mbx_sm4_gcm_init_mb16
 libcrypto_mb.so.11:mbx_sm4_gcm_update_aad_mb16
 libcrypto_mb.so.11:mbx_sm4_gcm_update_iv_mb16
 libcrypto_mb.so.11:mbx_sm4_set_key_mb16
+libcrypto_mb.so.11:mbx_sm4_xts_decrypt_mb16
+libcrypto_mb.so.11:mbx_sm4_xts_encrypt_mb16
+libcrypto_mb.so.11:mbx_sm4_xts_set_keys_mb16
 libcrypto_mb.so.11:mbx_x25519_mb8
 libcrypto_mb.so.11:mbx_x25519_public_key_mb8
 libippcp.so.11:cpGetCacheSize
