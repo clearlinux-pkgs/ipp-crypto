@@ -665,3 +665,9 @@ libippcp.so.11:ippsTDESEncryptECB
 libippcp.so.11:ippsTDESEncryptOFB
 libippcp.so.11:ippsTRNGenRDSEED
 libippcp.so.11:ippsTRNGenRDSEED_BN
+libippcp.so.11:ippsXMSSBufferGetSize
+libippcp.so.11:ippsXMSSPublicKeyStateGetSize
+libippcp.so.11:ippsXMSSSetPublicKeyState
+libippcp.so.11:ippsXMSSSetSignatureState
+libippcp.so.11:ippsXMSSSignatureStateGetSize
+libippcp.so.11:ippsXMSSVerify
