@@ -492,6 +492,12 @@ libippcp.so.11:ippsHashUnpack
 libippcp.so.11:ippsHashUnpack_rmf
 libippcp.so.11:ippsHashUpdate
 libippcp.so.11:ippsHashUpdate_rmf
+libippcp.so.11:ippsLMSBufferGetSize
+libippcp.so.11:ippsLMSPublicKeyStateGetSize
+libippcp.so.11:ippsLMSSetPublicKeyState
+libippcp.so.11:ippsLMSSetSignatureState
+libippcp.so.11:ippsLMSSignatureStateGetSize
+libippcp.so.11:ippsLMSVerify
 libippcp.so.11:ippsMAC_BN_I
 libippcp.so.11:ippsMD5Duplicate
 libippcp.so.11:ippsMD5Final
